@@ -1,4 +1,4 @@
-from piece import Pawn, Queen
+from piece import Pawn, Queen, Rook, Knight, King, Bishop
 
 class Board():
 	def __init__(self):
@@ -7,11 +7,18 @@ class Board():
 			
 	def setup_board(self):
 		board = [[None]*8 for _ in range(8)]
+		
+		board[0] = [
+			Rook('white'), Knight('white'), Bishop('white'), Queen('white'),
+			King('white'), Bishop('white'), Knight('white'), Rook('white')
+    ]
 		board[1] = [Pawn('white') for _ in range(8)]
 		board[6] = [Pawn('black') for _ in range(8)]
 
-		board[0][3] = Queen('white')
-		board[7][3] = Queen('black')
+		board[7] = [
+			Rook('black'), Knight('black'), Bishop('black'), Queen('black'),
+			King('black'), Bishop('black'), Knight('black'), Rook('black')
+    ]
 		return board
 
 	def move_piece(self, from_pos, to_pos):
