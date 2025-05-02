@@ -1,6 +1,7 @@
 #!env/bin/python
 from board import Board
 from piece import Piece, Pawn, Queen
+from game import Game
 
 board = Board()
 #board.grid[6][4] = Pawn('white')
@@ -15,20 +16,12 @@ def to_chess_notation(x, y):
 
   return f"{file}{rank}"
 
-board.grid[4][5] = Queen('white')
-queen = board.grid[4][5]
-moves = queen.get_moves((4, 5), board)
-
-
-print("  a  b  c  d  e  f  g  h")
-for i in range(7, -1, -1):
-    rank = i + 1
-    row = board.grid[i]
-    row_str = '  '.join(piece.symbol if piece else '.' for piece in row)
-    print(f"{rank} {row_str}")
-
-# queen = board.grid[0][3]
-# moves = queen.get_moves((0, 3), board)
-for i in moves:
-  print(to_chess_notation(i[0], i[1]), end=', ')
-print()
+game = Game()
+game.print_board()
+pawn = game.board.get_piece(6, 4)
+moves = pawn.get_moves((6, 4), game.board)
+print("Legal moves for Pawn at e2:")
+for x, y in moves:
+  print(to_chess_notation(x, y))
+game.move((6, 4), (4, 4))
+game.print_board()

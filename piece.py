@@ -27,7 +27,6 @@ class Pawn(Piece):
 			if x == start_row and board.is_empty(x + 2 * directions, y):
 				moves.append((x + 2 * directions, y))
 
-
 		return moves
 
 class Queen(Piece):
