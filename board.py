@@ -4,6 +4,7 @@ class Board():
   def __init__(self):
     self.grid = self.setup_board()
     self.turn = 'white'
+    self.en_passant_target = None
       
   def setup_board(self):
     board = [[None] * 8 for _ in range(8)]

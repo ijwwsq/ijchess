@@ -1,6 +1,7 @@
 class Piece:
 	def __init__(self, color):
 		self.color = color
+		self.has_moved = False
 	
 	@property
 	def symbol(self):
@@ -26,6 +27,11 @@ class Pawn(Piece):
 			moves.append((x + directions, y))
 			if x == start_row and board.is_empty(x + 2 * directions, y):
 				moves.append((x + 2 * directions, y))
+
+		if board.en_passant_target:
+			ex, ey = board.en_passant_target
+			if x == (3 if self.color == 'white' else 4) and abs(y - ey) == 1 and ex == x + directions:
+				moves.append((ex, ey))
 
 		return moves
 
@@ -100,6 +106,20 @@ class King(Piece):
 			# todo: capture logic here
 			if target is None or target.color != self.color:
 				moves.append((new_x, new_y))
+
+			# castling
+			if not self.has_moved:
+				# king side short
+				if all(board.is_empty(x, col) for col in [5,6]):
+					rook = board.get_piece(x, 7)
+					if isinstance(rook, Rook) and not rook.has_moved:
+						moves.append((x, 6))
+				
+				# queen side long
+				if all(board.is_empty(x, col) for col in [1,2,3]):
+					rook = board.get_piece(x, 0)
+					if isinstance(rook, Rook) and not rook.has_moved:
+						moves.append((x, 2))
 
 		return moves
 

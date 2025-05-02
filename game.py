@@ -1,4 +1,6 @@
 from board import Board
+from piece import King, Pawn
+
 
 class Game:
   def __init__(self):
@@ -32,11 +34,37 @@ class Game:
     if target:
       print(f"{piece.symbol} captures {target.symbol} at {to_chess_notation(x2, y2)}")
 
+    # castling
+    if isinstance(piece, King) and abs(y2 - y1) == 2:
+      if y2 == 6:  # kingside
+        rook = self.board.get_piece(x1, 7)
+        self.board.grid[x1][5] = rook
+        self.board.grid[x1][7] = None
+      else:  # queenside
+        rook = self.board.get_piece(x1, 0)
+        self.board.grid[x1][3] = rook
+        self.board.grid[x1][0] = None
+      if rook:
+        rook.has_moved = True
+    
+    # en passant
+    if isinstance(piece, Pawn) and (x2, y2) == self.board.en_passant_target:
+      take_x = x1
+      self.board.grid[take_x][y2] = None
+      print("En passant capture!")
+    
+    # update en passant possibility
+    self.board.en_passant_target = None
+    
+    if isinstance(piece, Pawn) and abs(x2 - x1) == 2:
+      self.board.en_passant_target = ((x1 + x2) // 2, y1)
+
     # move
     self.board.grid[x2][y2] = piece
     self.board.grid[x1][y1] = None
 
     self.switch_turn()
+
     return True
 
   def print_board(self):
