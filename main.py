@@ -1,3 +1,4 @@
+#!env/bin/python
 from board import Board
 from piece import Piece, Pawn, Queen
 
@@ -30,4 +31,4 @@ for i in range(7, -1, -1):
 # moves = queen.get_moves((0, 3), board)
 for i in moves:
   print(to_chess_notation(i[0], i[1]), end=', ')
-#print("Moves:", moves)
+print()

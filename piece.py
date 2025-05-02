@@ -41,6 +41,7 @@ class Queen(Piece):
 		directions = [(1, 1), (-1, 1), (1, -1), (-1, -1), (0, 1), (0, -1), (1, 0), (-1, 0)]
 		moves = []
 		x, y = pos
+		capture = 0 # add point for piece here in future
 
 		for dx, dy in directions:
 			i = 1
@@ -56,7 +57,7 @@ class Queen(Piece):
 				elif board.get_piece(new_x, new_y).color != self.color:
 					moves.append((new_x, new_y)) # capture
 					print(f'capture on {new_x} {new_y}')
-					break # cant move after the capture
+					break # cant move further if we capture the figure
 				else:
 					break
 
