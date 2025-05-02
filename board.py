@@ -21,10 +21,6 @@ class Board():
 
     return board
 
-  def move_piece(self, from_pos, to_pos):
-    pass
-    # if legal -> go (from_pos -> to_pos)
-
   def on_board(self, x, y):
     return 0 <= x < 8 and 0 <= y < 8
 

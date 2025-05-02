@@ -4,7 +4,7 @@ class Piece:
 	
 	@property
 	def symbol(self):
-		raise NotImplementedError('each piec emust define its own symbol')
+		raise NotImplementedError('each piece emust define its own symbol')
 
 	def get_moves(sel, pos, board):
 		raise NotImplementedError('each piece must implements its own logic')
