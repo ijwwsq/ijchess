@@ -1,0 +1,1 @@
+so 'R' is white 'r' is black, thats the logic
