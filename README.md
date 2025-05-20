@@ -10,6 +10,8 @@ its very poorly written code, but im not making science, im making party
 
 so 'R' is white rook 'r' is black rook, thats the logic
 
+something is wrong with en passant
+
 todo: 
 - [ ] each piece in separate file (?)
 - [ ] calculate points for capture

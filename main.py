@@ -9,13 +9,6 @@ from game import Game
 #pawn = board.grid[6][4]
 #moves = pawn.get_moves((6, 4), board)
 
-def to_chess_notation(x, y):
-  files = 'abcdefgh'
-  rank = x+1
-  file = files[y]
-
-  return f"{file}{rank}"
-
 game = Game()
 game.print_board()
 
